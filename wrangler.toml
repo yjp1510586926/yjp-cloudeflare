@@ -1,3 +1,5 @@
 name = "yjp-cloudeflare"
 compatibility_date = "2025-11-22"
-pages_build_output_dir = "dist"
+
+[assets]
+directory = "./dist"
