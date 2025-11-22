@@ -35,6 +35,14 @@ export const createUser = async (name, email) => {
   return data.createUser;
 };
 
+export const deleteUser = async (id) => {
+  const data = await graphqlRequest(
+    `mutation DeleteUser($id: ID!) { deleteUser(id: $id) { id } }`,
+    { id }
+  );
+  return data.deleteUser;
+};
+
 export const testHello = async () => {
   const data = await graphqlRequest(`query { hello }`);
   return data.hello;

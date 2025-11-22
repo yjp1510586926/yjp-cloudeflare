@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { fetchUsers, createUser, testHello } from "./api/graphql";
+import { fetchUsers, createUser, deleteUser, testHello } from "./api/graphql";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -46,6 +46,22 @@ function App() {
     try {
       await createUser(newUser.name, newUser.email);
       setNewUser({ name: "", email: "" });
+      await loadUsers(); // 重新加载用户列表
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 删除用户
+  const handleDeleteUser = async (id) => {
+    if (!window.confirm("确定要删除该用户吗？")) return;
+
+    setLoading(true);
+    setError(null);
+    try {
+      await deleteUser(id);
       await loadUsers(); // 重新加载用户列表
     } catch (err) {
       setError(err.message);
@@ -131,6 +147,14 @@ function App() {
                       创建于: {new Date(user.createdAt).toLocaleString('zh-CN')}
                     </p>
                   </div>
+                  <button 
+                    className="delete-btn"
+                    onClick={() => handleDeleteUser(user.id)}
+                    disabled={loading}
+                    title="删除用户"
+                  >
+                    🗑️
+                  </button>
                 </div>
               ))}
             </div>

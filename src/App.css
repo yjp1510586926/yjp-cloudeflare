@@ -259,3 +259,22 @@ button:disabled {
     width: 100%;
   }
 }
+
+/* 删除按钮样式 */
+.delete-btn {
+  background: transparent;
+  color: #ff4d4f;
+  padding: 8px;
+  font-size: 1.2rem;
+  opacity: 0.7;
+  align-self: center;
+  box-shadow: none;
+  margin-left: 10px;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: rgba(255, 77, 79, 0.1);
+  transform: scale(1.1);
+  opacity: 1;
+  box-shadow: none;
+}
